@@ -14,7 +14,9 @@ const ProtectedRoute = ({ Component }) => {
     }
   }, [user]);
   return (
-    <Component/>
+    <>
+      <Component/>
+    </>
   )
 }
 

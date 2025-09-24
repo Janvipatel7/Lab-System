@@ -6,7 +6,7 @@ import { PcContext } from "../../context/PcContextProvider";
 const Student = () => {
 
   const navigate = useNavigate();
-  const { students , showPcName } = useContext(StudentContext);
+  const { students , showPcName , deleteStudent} = useContext(StudentContext);
   const { showLabName } = useContext(PcContext);
 
   return (
@@ -49,7 +49,7 @@ const Student = () => {
             <tbody>
               {
                 students.map((student, idx) => {
-                  return <tr key={student.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  return <tr key={student.studentId} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       {idx + 1}
                     </th>
@@ -57,23 +57,23 @@ const Student = () => {
                       {student.name}
                     </td>
                     <td className="px-6 py-4">
-                      {student.mail}
+                      {student.email}
                     </td>
                     <td className="px-6 py-4">
                       {student.grid}
                     </td>
                     <td className="px-6 py-4">
-                      {showLabName(student.labId)}
+                      {showLabName(student.labId) || "Unassigned"}
                     </td>
                     <td className="px-6 py-4">
-                      {showPcName(student.pcId)}
+                      {showPcName(student.pcId) || "Unassigned"}
                     </td>
                     <td className="px-6 py-4">
                       {student.createdAt.toDate().toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 flex items-center gap-3">
-                      <button onClick={() => navigate(`/edit-student/${student.id}`)} className="font-medium text-green-600 dark:text-green-500 hover:underline">Edit</button>
-                      <button onClick={() => deletestudent(student.id)} className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
+                      <button onClick={() => navigate(`/edit-student/${student.studentId}`)} className="font-medium text-green-600 dark:text-green-500 hover:underline">Edit</button>
+                      <button onClick={() => deleteStudent(student.studentId)} className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
                     </td>
                   </tr>
                 })

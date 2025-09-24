@@ -9,6 +9,7 @@ export const PcContext = createContext();
 const PcContextProvider = ({ children }) => {
 
   const [pcs, setPcs] = useState([]);
+  const [flag, setFlag] = useState(false)
   const collectionRefe = collection(db, "pcs")
   const { labs, fetchLab } = useContext(LabContext)
   console.log(labs);
@@ -50,7 +51,7 @@ const PcContextProvider = ({ children }) => {
 
       const batch = writeBatch(db);
       toUpdateSnapShot.forEach((studentDoc) => {
-        batch.update(studentDoc.ref, { pcId: null});
+        batch.update(studentDoc.ref, { pcId: null });
       })
       await batch.commit()
 
@@ -84,9 +85,23 @@ const PcContextProvider = ({ children }) => {
     }
   }
 
+  const togglePcStatus = async (pcId, currentStatus) => {
+    try {
+      const newStatus =
+        currentStatus === "Available" || currentStatus === "Occupied"
+          ? "in-Repair"
+          : "Available";
+
+      await updateDoc(doc(db, "pcs", pcId), { status: newStatus });
+      fetchPc();
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to update PC status");
+    }
+  };
 
   const value = {
-    addPc, pcs, deletePc, updatedPc, showLabName , fetchPc
+    addPc, pcs, deletePc, updatedPc, showLabName, fetchPc, togglePcStatus
   }
 
   return (
