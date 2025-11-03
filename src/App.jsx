@@ -10,6 +10,7 @@ import Pc from "./pages/pcs/Pc";
 import ManagePc from "./pages/pcs/ManagePc";
 import Student from "./pages/students/Student";
 import ManageStudent from "./pages/students/ManageStudent";
+import ErrorPage from "./pages/ErrorPage";
 
 const App = () => {
     return (
@@ -30,6 +31,7 @@ const App = () => {
                 <Route path="/students" element={<ProtectedRoute Component={Student} />} />
                 <Route path="/add-student" element={<ProtectedRoute Component={ManageStudent} />} />
                 <Route path="/edit-student/:studentId" element={<ProtectedRoute Component={ManageStudent} />} />
+                <Route path="*" element={<ErrorPage />} />
             </Routes>
             <ToastContainer />
         </BrowserRouter>

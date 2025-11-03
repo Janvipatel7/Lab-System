@@ -19,13 +19,12 @@ const StudentContextProvider = ({ children }) => {
     try {
       const stuDateObj = { ...student, createdAt: new Date() }
       await addDoc(collectionRefer, stuDateObj);
-      toast.success("student add successfully")
       await updateDoc(doc(db, "pcs", student.pcId), {
         status: "occupied",
       });
     } catch (error) {
       console.log(error);
-      // toast.error("Something Went Wrong !")
+      toast.error("Something Went Wrong !");
     }
     await fetchStudent();
     await fetchPc();

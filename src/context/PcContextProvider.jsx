@@ -9,7 +9,6 @@ export const PcContext = createContext();
 const PcContextProvider = ({ children }) => {
 
   const [pcs, setPcs] = useState([]);
-  const [flag, setFlag] = useState(false)
   const collectionRefe = collection(db, "pcs")
   const { labs, fetchLab } = useContext(LabContext)
   console.log(labs);

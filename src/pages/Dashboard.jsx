@@ -3,26 +3,8 @@ import { LabContext } from "../context/LabContextProvider";
 import { PcContext } from "../context/PcContextProvider";
 import { StudentContext } from "../context/StudentContextProvider";
 import { Bar, Doughnut } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  ArcElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  ArcElement,
-  Title,
-  Tooltip,
-  Legend
-);
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend} from "chart.js";
+ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend);
 
 const Dashboard = () => {
   const { labs, fetchLab } = useContext(LabContext);
@@ -52,6 +34,7 @@ const Dashboard = () => {
     ],
   };
 
+
   const statusCount = { Available: 0, Occupied: 0, "In-Repairing": 0 };
   pcs.forEach((pc) => {
     if (pc.status === "Available") statusCount.Available++;
@@ -60,7 +43,7 @@ const Dashboard = () => {
   });
 
   const pcStatusData = {
-    labels: ["Available", "Occupied", "In-Repairing", "Labs", "PCs", "Students"],
+    labels: ["Available", "Occupied", "In-Repairing"],
     datasets: [
       {
         label: "PC Status",
@@ -72,23 +55,21 @@ const Dashboard = () => {
         backgroundColor: ["#22c55e", "#ec4899", "#000"],
         borderWidth: 2,
       },
-      {
-        label: "Summary",
-        data: [labs.length, pcs.length, students.length],
-        backgroundColor: ["#f5f5f5", "#d1d5db", "#e5e7eb"],
-        borderWidth: 2,
-      },
     ],
   };
 
   return (
-    <div className="bg-white min-h-screen p-8 text-black">
-      <h1 className="text-3xl font-bold mb-10">Dashboard</h1>
+    <div className="bg-white min-h-screen p-6 md:p-10 text-black">
+      <h1 className="text-3xl font-bold mb-10 text-center md:text-left">
+        Dashboard
+      </h1>
 
-      <div className=" w-6/12 p-8 rounded-xl  mb-12">
-        <h2 className="text-2xl font-semibold mb-6 text-gray-900">Overview</h2>
+      <div className="w-full md:w-8/12 lg:w-6/12 mx-auto md:mx-0 bg-gray-50 p-6 rounded-xl shadow-sm mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-gray-900 text-center md:text-left">
+          Overview
+        </h2>
 
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap justify-center md:justify-start gap-4">
           <div className="flex items-center gap-2 bg-pink-100 text-pink-700 px-5 py-2 rounded-full shadow-sm">
             <span className="font-medium">Labs:</span>
             <span className="font-bold text-lg">{labs.length}</span>
@@ -106,13 +87,12 @@ const Dashboard = () => {
         </div>
       </div>
 
-
-      {/* Charts */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Slim Bar Chart */}
         <div className="p-6 bg-white border rounded-xl shadow-md flex flex-col items-center">
-          <h3 className="text-xl font-semibold mb-4">PCs per Lab</h3>
-          <div className="w-[85%] h-[250px]">
+          <h3 className="text-xl font-semibold mb-4 text-center">
+            PCs per Lab
+          </h3>
+          <div className="w-full sm:w-[90%] h-[250px] md:h-[300px]">
             <Bar
               data={pcPerLabData}
               options={{
@@ -128,16 +108,17 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Multi-level Doughnut Chart */}
         <div className="p-6 bg-white border rounded-xl shadow-md flex flex-col items-center">
-          <h3 className="text-xl font-semibold mb-4">PC Status Overview</h3>
-          <div className="w-[60%] h-[240px]">
+          <h3 className="text-xl font-semibold mb-4 text-center">
+            PC Status Overview
+          </h3>
+          <div className="w-[70%] sm:w-[60%] md:w-[55%] h-[220px] md:h-[260px]">
             <Doughnut
               data={pcStatusData}
               options={{
                 responsive: true,
                 maintainAspectRatio: false,
-                cutout: "60%", // inner hole size
+                cutout: "60%",
                 plugins: {
                   legend: { position: "bottom" },
                   tooltip: { enabled: true },
