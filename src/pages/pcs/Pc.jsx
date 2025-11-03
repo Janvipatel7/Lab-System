@@ -5,57 +5,64 @@ import { LabContext } from "../../context/LabContextProvider";
 
 const Pc = () => {
     const navigate = useNavigate();
-    const { pcs, deletePc, showLabName, changeStateToRepair, changeStateToAvailable } = useContext(PcContext);
+    const { pcs, deletePc, showLabName, changeStateToRepair, changeStateToAvailable } =
+        useContext(PcContext);
     const { labs } = useContext(LabContext);
 
     return (
-        <div className="bg-gray-100 min-h-screen p-10 text-black">
-            <div className="flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-bold">PC Details</h2>
+        <div className="bg-gray-100 min-h-screen p-4 sm:p-6 md:p-10 text-black">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+                <h2 className="text-2xl sm:text-3xl font-bold">PC Details</h2>
                 <button
                     onClick={() => navigate("/add-pc")}
-                    className="px-6 py-2 rounded bg-black text-white font-semibold hover:bg-gray-800 transition"
+                    className="px-5 sm:px-6 py-2 rounded bg-black text-white font-semibold hover:bg-gray-800 transition w-full sm:w-auto"
                 >
                     + Add PC
                 </button>
             </div>
 
             <div className="relative overflow-x-auto shadow-lg rounded-lg">
-                <table className="w-full text-base text-left bg-white rounded-lg">
-                    <thead className="text-sm uppercase bg-black text-gray-50">
+                <table className="w-full text-sm sm:text-base text-left bg-white rounded-lg">
+                    <thead className="text-xs sm:text-sm uppercase bg-black text-gray-50">
                         <tr>
-                            <th className="px-6 py-4">No</th>
-                            <th className="px-6 py-4">PC Name</th>
-                            <th className="px-6 py-4">Lab Name</th>
-                            <th className="px-6 py-4">Status</th>
-                            <th className="px-6 py-4">Created At</th>
-                            <th className="px-6 py-4">Actions</th>
-                            <th className="px-6 py-4">Toggle</th>
+                            <th className="px-4 sm:px-6 py-3 sm:py-4">No</th>
+                            <th className="px-4 sm:px-6 py-3 sm:py-4">PC Name</th>
+                            <th className="px-4 sm:px-6 py-3 sm:py-4">Lab Name</th>
+                            <th className="px-4 sm:px-6 py-3 sm:py-4">Status</th>
+                            <th className="px-4 sm:px-6 py-3 sm:py-4">Created At</th>
+                            <th className="px-4 sm:px-6 py-3 sm:py-4">Actions</th>
+                            <th className="px-4 sm:px-6 py-3 sm:py-4">Toggle</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         {pcs.map((pc, idx) => (
                             <tr
                                 key={pc.id}
                                 className="bg-white border-b border-gray-300 hover:bg-gray-50"
                             >
-                                <td className="px-6 py-4">{idx + 1}</td>
-                                <td className="px-6 py-4 font-medium">{pc.name}</td>
-                                <td className="px-6 py-4">{showLabName(pc.labId)}</td>
-                                <td className="px-6 py-4 capitalize">{pc.status}</td>
-                                <td className="px-6 py-4">
+                                <td className="px-4 sm:px-6 py-3 sm:py-4">{idx + 1}</td>
+                                <td className="px-4 sm:px-6 py-3 sm:py-4 font-medium">
+                                    {pc.name}
+                                </td>
+                                <td className="px-4 sm:px-6 py-3 sm:py-4">
+                                    {showLabName(pc.labId)}
+                                </td>
+                                <td className="px-4 sm:px-6 py-3 sm:py-4 capitalize">
+                                    {pc.status}
+                                </td>
+                                <td className="px-4 sm:px-6 py-3 sm:py-4">
                                     {pc.createdAt.toDate().toLocaleDateString()}
                                 </td>
 
-                                <td className="px-6 py-4">
-                                    <div className="flex  gap-4">
-
+                                <td className="px-4 sm:px-6 py-3 sm:py-4">
+                                    <div className="flex flex-wrap gap-3 sm:gap-4">
                                         <button
                                             onClick={() => navigate(`/edit-pc/${pc.id}`)}
                                             className="text-[#014e4e] font-semibold hover:underline"
                                         >
                                             <svg
-                                                className="w-6 h-6 text-[#014e4e]"
+                                                className="w-5 h-5 sm:w-6 sm:h-6 text-[#014e4e]"
                                                 aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 fill="none"
@@ -76,7 +83,7 @@ const Pc = () => {
                                             className="text-red-600 hover:underline font-semibold"
                                         >
                                             <svg
-                                                className="w-6 h-6 text-red-600"
+                                                className="w-5 h-5 sm:w-6 sm:h-6 text-red-600"
                                                 aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 fill="none"
@@ -94,7 +101,7 @@ const Pc = () => {
                                     </div>
                                 </td>
 
-                                <td>
+                                <td className="px-4 sm:px-6 py-3 sm:py-4">
                                     {pc.status !== "In-Repairing" ? (
                                         <button
                                             className="font-medium text-yellow-600 hover:underline"

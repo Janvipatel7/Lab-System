@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContextProvider";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -33,27 +32,35 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (input.email.trim() === "" || input.password.trim() === "") {
+      toast.error("Enter all details correctly!");
+      setInput({ email: "", password: "" });
+      return;
+    }
+
     try {
       const res = await handleLogin(input.email, input.password);
       if (res) {
+        toast.success("Login successful!");
+        setInput({ email: "", password: "" });
         navigate("/");
       }
     } catch (error) {
-      if (error.code === "auth/invalid-credential") {
-        toast.error("Invalid credential");
-      }
+      toast.error("Invalid credentials. Please try again.");
+      setInput({ email: "", password: "" });
     }
   };
 
   return (
     <div className="bg-black h-screen flex items-center justify-center">
-      <div className="bg-white p-8 rounded-2xl shadow-lg w-80 md:w-96">
-        <h1 className="text-3xl text-center mb-8 text-black font-semibold">
+      <div className="bg-white p-10 rounded-2xl shadow-xl w-[90%] max-w-[480px]">
+        <h1 className="text-4xl text-center mb-10 text-black font-bold">
           Lab Login
         </h1>
 
         <form onSubmit={handleSubmit}>
-          <div className="mb-5">
+          <div className="mb-6">
             <label
               htmlFor="email"
               className="block mb-2 text-sm font-medium text-black"
@@ -68,12 +75,11 @@ const Login = () => {
                 setInput({ ...input, [e.target.id]: e.target.value })
               }
               placeholder="admin@gmail.com"
-              required
-              className="bg-transparent border border-black text-black text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 placeholder-gray-500"
+              className="bg-transparent border border-black text-black text-base rounded-lg focus:ring-black focus:border-black block w-full p-3 placeholder-gray-500"
             />
           </div>
 
-          <div className="mb-5">
+          <div className="mb-8">
             <label
               htmlFor="password"
               className="block mb-2 text-sm font-medium text-black"
@@ -87,14 +93,14 @@ const Login = () => {
               onChange={(e) =>
                 setInput({ ...input, [e.target.id]: e.target.value })
               }
-              required
-              className="bg-transparent border border-black text-black text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 placeholder-gray-500"
+              placeholder="password" 
+              className="bg-transparent border border-black text-black text-base rounded-lg focus:ring-black focus:border-black block w-full p-3 placeholder-gray-500"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-black text-white font-medium rounded-lg text-sm px-5 py-2.5 hover:bg-gray-900 transition"
+            className="w-full bg-black text-white font-semibold rounded-lg text-base px-5 py-3 hover:bg-gray-900 transition"
           >
             Submit
           </button>

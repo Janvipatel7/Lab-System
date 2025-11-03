@@ -75,7 +75,7 @@ const ManagePc = () => {
                             id="name"
                             placeholder="Enter PC name"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
-                            required
+                            
                         />
                     </div>
 
@@ -91,7 +91,7 @@ const ManagePc = () => {
                             value={input.labId ? input.labId : ""}
                             id="labId"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
-                            required
+                
                         >
                             <option value="">Choose a Lab</option>
                             {labs.map((lab) => {

@@ -74,7 +74,6 @@ const ManageLab = () => {
                             id="name"
                             placeholder="Enter lab name"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
-                            required
                         />
                     </div>
 
@@ -91,7 +90,6 @@ const ManageLab = () => {
                             id="capacity"
                             placeholder="Enter capacity"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
-                            required
                         />
                     </div>
 
@@ -108,7 +106,6 @@ const ManageLab = () => {
                             id="location"
                             placeholder="Enter location"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
-                            required
                         />
                     </div>
 

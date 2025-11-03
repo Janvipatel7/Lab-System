@@ -9,60 +9,60 @@ const Student = () => {
   const { showLabName } = useContext(PcContext);
 
   return (
-    <div className="bg-gray-100 min-h-screen p-10 text-black">
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-3xl font-bold">Student Details</h2>
+    <div className="bg-gray-100 min-h-screen p-4 sm:p-6 md:p-10 text-black">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold">Student Details</h2>
         <button
           onClick={() => navigate("/add-student")}
-          className="px-6 py-2 rounded bg-black text-white font-semibold hover:bg-gray-800 transition"
+          className="px-5 py-2 rounded bg-black text-white font-semibold hover:bg-gray-800 transition w-full sm:w-auto"
         >
           + Add Student
         </button>
       </div>
 
       <div className="relative overflow-x-auto shadow-lg rounded-lg">
-        <table className="w-full text-base text-left bg-white rounded-lg">
-          <thead className="text-sm uppercase bg-black text-gray-50">
+        <table className="w-full text-sm sm:text-base text-left bg-white rounded-lg min-w-max">
+          <thead className="text-xs sm:text-sm uppercase bg-black text-gray-50">
             <tr>
-              <th className="px-6 py-4">No</th>
-              <th className="px-6 py-4">Student Name</th>
-              <th className="px-6 py-4">Email</th>
-              <th className="px-6 py-4">GRID</th>
-              <th className="px-6 py-4">Lab Name</th>
-              <th className="px-6 py-4">PC Name</th>
-              <th className="px-6 py-4">Assigned Date</th>
-              <th className="px-6 py-4 text-center">Actions</th>
+              <th className="px-4 sm:px-6 py-3 sm:py-4">No</th>
+              <th className="px-4 sm:px-6 py-3 sm:py-4">Student Name</th>
+              <th className="px-4 sm:px-6 py-3 sm:py-4">Email</th>
+              <th className="px-4 sm:px-6 py-3 sm:py-4">GRID</th>
+              <th className="px-4 sm:px-6 py-3 sm:py-4">Lab Name</th>
+              <th className="px-4 sm:px-6 py-3 sm:py-4">PC Name</th>
+              <th className="px-4 sm:px-6 py-3 sm:py-4">Assigned Date</th>
+              <th className="px-4 sm:px-6 py-3 sm:py-4 text-center">Actions</th>
             </tr>
           </thead>
+
           <tbody>
             {students.map((student, idx) => (
               <tr
                 key={student.studentId}
-                className="bg-white border-b border-gray-300 hover:bg-gray-50"
+                className="bg-white border-b border-gray-300 hover:bg-gray-50 transition"
               >
-                <td className="px-6 py-4">{idx + 1}</td>
-                <td className="px-6 py-4 font-medium">{student.name}</td>
-                <td className="px-6 py-4">{student.email}</td>
-                <td className="px-6 py-4">{student.grid}</td>
-                <td className="px-6 py-4">
+                <td className="px-4 sm:px-6 py-3 sm:py-4">{idx + 1}</td>
+                <td className="px-4 sm:px-6 py-3 sm:py-4 font-medium">{student.name}</td>
+                <td className="px-4 sm:px-6 py-3 sm:py-4">{student.email}</td>
+                <td className="px-4 sm:px-6 py-3 sm:py-4">{student.grid}</td>
+                <td className="px-4 sm:px-6 py-3 sm:py-4">
                   {showLabName(student.labId) || "Unassigned"}
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-4 sm:px-6 py-3 sm:py-4">
                   {showPcName(student.pcId) || "Unassigned"}
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-4 sm:px-6 py-3 sm:py-4">
                   {student.createdAt.toDate().toLocaleDateString()}
                 </td>
-
-                <td className="px-6 py-4">
-                  <div className="flex justify-center gap-4">
+                <td className="px-4 sm:px-6 py-3 sm:py-4">
+                  <div className="flex justify-center gap-3 sm:gap-4">
                     <button
                       onClick={() => navigate(`/edit-student/${student.studentId}`)}
                       className="hover:scale-110 transition-transform"
                       title="Edit"
                     >
                       <svg
-                        className="w-6 h-6 text-[#014e4e]"
+                        className="w-5 sm:w-6 h-5 sm:h-6 text-[#014e4e]"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -84,7 +84,7 @@ const Student = () => {
                       title="Delete"
                     >
                       <svg
-                        className="w-6 h-6 text-red-600"
+                        className="w-5 sm:w-6 h-5 sm:h-6 text-red-600"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
